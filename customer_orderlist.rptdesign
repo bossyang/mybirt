@@ -679,9 +679,6 @@ where  customernumber = ?]]></xml-property>
             <column id="45">
                 <property name="width">30%</property>
             </column>
-            <column id="113">
-                <property name="width">30%</property>
-            </column>
             <column id="46">
                 <property name="width">40%</property>
             </column>
@@ -694,24 +691,10 @@ where  customernumber = ?]]></xml-property>
                         <expression name="uri" type="constant">ClassicLogo.jpg</expression>
                     </image>
                 </cell>
-                <cell id="112">
-                    <property name="paddingBottom">10pt</property>
-                    <property name="textAlign">center</property>
-                    <property name="verticalAlign">bottom</property>
-                    <label id="51">
-                        <property name="fontSize">16pt</property>
-                        <text-property name="text">Order List</text-property>
-                    </label>
-                    <text id="54">
-                        <property name="fontFamily">"Tahoma"</property>
-                        <property name="fontSize">12pt</property>
-                        <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<VALUE-OF>reportContext.getParameterDisplayText("pCustomer")</VALUE-OF>]]></text-property>
-                    </text>
-                </cell>
                 <cell id="49">
                     <property name="fontSize">large</property>
-                    <property name="verticalAlign">middle</property>
+                    <property name="paddingBottom">10pt</property>
+                    <property name="verticalAlign">bottom</property>
                     <label id="110">
                         <property name="fontSize">18pt</property>
                         <property name="fontWeight">bold</property>
@@ -727,16 +710,32 @@ San Francisco, CA 94107<BR>
 <BR>
 ]]></text-property>
                     </text>
+                    <label id="118">
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Order List</text-property>
+                    </label>
                 </cell>
             </row>
         </grid>
         <grid id="14">
             <column id="15"/>
             <row id="16">
+                <property name="height">0.1in</property>
                 <cell id="17"/>
             </row>
             <row id="18">
                 <cell id="19">
+                    <property name="paddingLeft">10pt</property>
+                    <text id="54">
+                        <property name="fontFamily">"Tahoma"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>reportContext.getParameterDisplayText("pCustomer")</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="20">
+                <cell id="21">
                     <table id="22">
                         <property name="dataSet">Orders</property>
                         <list-property name="boundDataColumns">
@@ -759,6 +758,9 @@ San Francisco, CA 94107<BR>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
+                        <column id="122">
+                            <property name="width">10%</property>
+                        </column>
                         <column id="41">
                             <property name="width">20%</property>
                         </column>
@@ -770,6 +772,11 @@ San Francisco, CA 94107<BR>
                             <row id="23">
                                 <property name="backgroundColor">#8080FF</property>
                                 <property name="fontWeight">bold</property>
+                                <cell id="119">
+                                    <label id="123">
+                                        <text-property name="text">#</text-property>
+                                    </label>
+                                </cell>
                                 <cell id="24">
                                     <label id="25">
                                         <text-property name="text">ORDERNUMBER</text-property>
@@ -789,6 +796,23 @@ San Francisco, CA 94107<BR>
                         </header>
                         <detail>
                             <row id="30">
+                                <list-property name="highlightRules">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <property name="backgroundColor">#FFAAFF</property>
+                                        <expression name="testExpr" type="javascript">row.__rownum % 2</expression>
+                                        <simple-property-list name="value1">
+                                            <value type="javascript">1</value>
+                                        </simple-property-list>
+                                    </structure>
+                                </list-property>
+                                <cell id="120">
+                                    <text-data id="124">
+                                        <property name="textAlign">center</property>
+                                        <expression name="valueExpr">row.__rownum + 1</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
                                 <cell id="31">
                                     <data id="32">
                                         <property name="paddingLeft">10pt</property>
@@ -816,6 +840,7 @@ San Francisco, CA 94107<BR>
                         </detail>
                         <footer>
                             <row id="37">
+                                <cell id="121"/>
                                 <cell id="38"/>
                                 <cell id="39"/>
                                 <cell id="40"/>
@@ -823,9 +848,6 @@ San Francisco, CA 94107<BR>
                         </footer>
                     </table>
                 </cell>
-            </row>
-            <row id="20">
-                <cell id="21"/>
             </row>
         </grid>
     </body>
