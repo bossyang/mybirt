@@ -1,0 +1,37 @@
+-- BIRT Example - Top N / Top M% of Customers
+SELECT customers.customername,
+       customers.customernumber,
+       SUM(orderdetails.quantityordered*
+       orderdetails.priceeach) AS customertotal
+FROM customers, orders, orderdetails
+WHERE customers.customernumber = orders.customernumber 
+AND orders.ordernumber = orderdetails.ordernumber
+GROUP BY customers.customername, customers.customernumber
+ORDER BY customertotal
+
+-- BIRT Example - Sales by State and Product Line
+SELECT customers.state,
+       orderdetails.quantityordered,
+       orderdetails.priceEach,
+       products.productline 
+FROM customers 
+INNER JOIN orders ON customers.customernumber = orders.customernumber 
+INNER JOIN orderdetails ON orders.ordernumber = orderdetails.ordernumber 
+INNER JOIN products ON orderdetails.productcode = products.productCode 
+WHERE customers.country = 'USA'
+
+-- BIRT Example - Cascaded Parameter Report
+SELECT customername, customernumber
+FROM   customers
+-- orders
+SELECT *
+FROM   orders
+WHERE  orders.customernumber = ?
+
+-- BIRT Example - Master-Detail Report
+select *
+from orders
+-- order details
+select *
+from   orderdetails
+where  orderdetails.ordernumber = ?
