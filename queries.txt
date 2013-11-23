@@ -35,3 +35,13 @@ from orders
 select *
 from   orderdetails
 where  orderdetails.ordernumber = ?
+
+-- TOC Script
+for(i=1000; i<10000; i += 1000){
+  if( row["CREDIT_LIMIT"]< i ){
+    rangeStart = i-1000;  
+    rangeEnd = i-1;  
+    break;
+  }
+}
+displayString = rangeStart + " - " + rangeEnd;
